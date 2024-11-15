@@ -7,6 +7,7 @@ import ChildComponent from './components/ChildComponent';
 import PropsComponent from './components/PropsComponent';
 import ContentComponent from './components/ContentComponent';
 import StateComponent from './components/StateComponent';
+import LifeCycleComponent from './components/LifeCycleComponent';
 /*
   날짜 : 2024/11/12
   이름 : 이도영
@@ -28,6 +29,7 @@ function App() {
         <p>내용을 갖는 컴포넌트 입니다.</p>
       </ContentComponent>
       <StateComponent/>
+      <LifeCycleComponent/>
     </div>
   );
 }
