@@ -2,7 +2,7 @@ export default function Footer(){
     return (
       <>
         <footer>
-          <img src="./images/footer_logo.png" alt="로고" />
+          <img src="/images/footer_logo.png" alt="로고" />
           <p>
             (주)팜스토리 / 사업자등록번호 123-45-67890 / 통신판매업신고 제
             2013-부산진구-123호 / 벤처기업확인 서울지방중소기업청 제
