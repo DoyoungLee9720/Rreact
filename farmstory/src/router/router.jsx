@@ -14,6 +14,8 @@ const BoardWritePage = lazy(() => import("../pages/board/WritePage"));
 const BoardViewPage = lazy(() => import("../pages/board/ViewPage"));
 const BoardModifyPage = lazy(() => import("../pages/board/ModifyPage"));
 
+const AdminMainPage = lazy(()=> import("../pages/admin/MainPage"))
+const AdminProductRegisterPage = lazy(()=> import("../pages/admin/product/RegisterPage"))
 //라우팅 정의
 const router = createBrowserRouter([
   { path: "/", element: <MainPage /> },
@@ -25,10 +27,12 @@ const router = createBrowserRouter([
   { path: "/board/modify", element: <Suspense><BoardModifyPage /></Suspense> },
   { path: "/board/view", element: <Suspense><BoardViewPage /> </Suspense>},
   { path: "/user/login", element: <LoginPage /> },
+  { path: "/user/logout", element: null },
+  
   { path: "/user/terms", element: <TermsPage /> },
   { path: "/user/register", element: <RegisterPage /> },
-  { path: "/admin", element: null },
-  { path: "/admin/product/register", element: null },
+  { path: "/admin", element: <Suspense><AdminMainPage/></Suspense> },
+  { path: "/admin/product/register", element: <Suspense><AdminProductRegisterPage/></Suspense> },
 ]);
 
 // 라우터 내보내기

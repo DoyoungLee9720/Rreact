@@ -1,14 +1,47 @@
 import { Link } from "react-router-dom";
 import useCates from "../../hooks/useCates";
+import useAuth from "../../hooks/useAuth";
+import { useEffect, useState } from "react";
+import { postArticle } from "../../api/articleAPI";
 
 export default function Write() {
   const [cate1, cate2] = useCates();
+  const {username,accessToken,navigate} = useAuth();
+  //prettier-ignore
+  const [article, setArticle] = useState({
+                                  cate: cate2,
+                                  title: "",
+                                  content: "",
+                                  writer: username,
+                                });
+
+  const changeHandler =  (e)=>{
+    e.preventDefault();
+    setArticle({...article,[e.target.name]:e.target.value})
+  }
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const result = await postArticle(article,accessToken);
+    if(result){
+      alert("글 작성 했습니다.")
+      navigate("/board/list?cate1="+cate1+"&cate2="+cate2);
+    }
+  };
+  useEffect(()=>{
+    if(!username){
+        alert('로그인을 하셔야 합니다.');
+        navigate("/user/login");
+        return;
+      }
+  },[]);
+  
 
   return (
     <section className="write">
       <h1>글쓰기</h1>
-      <form action="#">
+      <form onSubmit={submitHandler}>
         <table border="0">
+          <tbody>
           <tr>
             <th>제목</th>
             <td>
@@ -16,13 +49,15 @@ export default function Write() {
                 type="text"
                 name="title"
                 placeholder="제목을 입력하세요."
+                value={article.title}
+                onChange={changeHandler}
               />
             </td>
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              <textarea name="content"></textarea>
+              <textarea name="content" value={article.content} onChange={changeHandler}></textarea>
             </td>
           </tr>
           <tr>
@@ -33,6 +68,7 @@ export default function Write() {
               <input type="file" name="file2" />
             </td>
           </tr>
+          </tbody>
         </table>
 
         <div>
